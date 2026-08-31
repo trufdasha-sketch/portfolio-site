@@ -1,0 +1,1993 @@
+.pass-modal {
+  position: fixed !important;
+  inset: 0 !important;
+
+  z-index: 5000 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100vw !important;
+  height: 100vh !important;
+
+  padding: 30px;
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.72);
+
+  backdrop-filter: blur(12px);
+
+  animation: passModalFade 0.25s ease both;
+}
+
+.pass-window {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  max-width: 90vw;
+  max-height: 90vh;
+
+  padding: 50px 50px 35px;
+
+  box-sizing: border-box;
+
+  border-radius: 24px;
+
+  background: rgba(28, 28, 28, 0.96);
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.55);
+
+  animation: passWindowOpen 0.35s ease both;
+}
+
+.pass-large {
+  display: block;
+
+  width: auto;
+  height: min(65vh, 650px);
+
+  max-width: 75vw;
+
+  object-fit: contain;
+}
+
+.pass-flip {
+  margin-top: 28px;
+
+  padding: 13px 28px;
+
+  border: 0;
+  border-radius: 14px;
+
+  background: #e56b9f;
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.pass-close {
+  position: absolute;
+
+  top: 12px;
+  right: 15px;
+
+  z-index: 5;
+
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.1);
+
+  color: white;
+
+  font-size: 28px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes passModalFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes passWindowOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #111;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+.portfolio {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #151515;
+}
+
+/* ЕДИНЫЙ ФОН */
+.background {
+  position: absolute;
+  inset: 0;
+
+  background-image: url('/assets/background/background.png');
+  background-size: cover;
+  background-position: center;
+
+  z-index: 0;
+}
+
+/*
+  КЕЙС
+
+  ВАЖНО:
+  case-full.png и case-empty.png = 1402 × 1122.
+  Поэтому сохраняем именно это соотношение.
+*/
+.case-wrapper {
+  position: absolute;
+
+  width: min(
+    94vw,
+    calc(94vh * 1402 / 1122)
+  );
+
+  aspect-ratio: 1402 / 1122;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 1;
+}
+/* Пустой кейс */
+.case {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+/*
+  ВСЕ ПРЕДМЕТЫ находятся внутри того же контейнера,
+  что и case-empty.png.
+
+  Поэтому координаты ниже соответствуют
+  исходным 1402 × 1122 px.
+*/
+.items {
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+}
+
+.portfolio-item {
+  position: absolute;
+
+  display: block;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transform-origin: center center;
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.portfolio-item img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+/* Небольшой hover, без изменения композиции */
+.portfolio-item:hover {
+  transform: scale(1.025);
+  filter: brightness(1.04);
+
+}
+
+/* =========================================================
+   МОДАЛЬНОЕ ОКНО
+   ========================================================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  backdrop-filter: blur(10px);
+}
+
+.modal-content {
+  position: relative;
+
+  width: min(500px, 90vw);
+
+  padding: 45px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+
+  background: rgba(28, 28, 28, 0.96);
+
+  color: white;
+
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h2 {
+  margin: 0 0 14px;
+  font-size: 32px;
+}
+
+.modal-content p {
+  margin: 0 0 30px;
+
+  color: #bcbcbc;
+
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.close {
+  position: absolute;
+
+  top: 15px;
+  right: 18px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 32px;
+
+  cursor: pointer;
+}
+
+.open-case {
+  border: 0;
+
+  padding: 13px 22px;
+
+  border-radius: 12px;
+
+  background: #e8e8e8;
+
+  color: #111;
+
+  cursor: pointer;
+}
+
+.open-case:hover {
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   МОБИЛЬНЫЙ ЭКРАН
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .portfolio {
+    overflow: hidden;
+  }
+
+  .case-wrapper {
+    width: 125vw;
+    max-width: none;
+  }
+ .closed-case {
+    width: 88vw;
+  }
+
+  .open-button {
+    padding: 12px 28px;
+    font-size: 14px;
+  }
+
+.binocular-hotspot {
+  font-size: 10px;
+  line-height: 1;
+  padding: 0 8px;
+  white-space: nowrap;
+}
+
+.binocular-hotspot-dacha,
+.binocular-hotspot-hiking {
+  height: 16%;
+}
+}
+/* =========================================================
+   РЕДАКТОР ПРЕДМЕТОВ
+========================================================= */
+
+.edit-button {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+
+  z-index: 1000;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+
+  padding: 10px 16px;
+
+  background: rgba(20, 20, 20, 0.85);
+  color: white;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+}
+
+.edit-button:hover {
+  background: rgba(40, 40, 40, 0.95);
+}
+
+.edit-button.active {
+  background: white;
+  color: #111;
+}
+
+
+.edit-panel {
+  position: fixed;
+
+  top: 24px;
+  right: 105px;
+
+  z-index: 1000;
+
+  display: flex;
+  gap: 8px;
+}
+
+.edit-panel button {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+
+  padding: 10px 14px;
+
+  background: rgba(20, 20, 20, 0.85);
+  color: white;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+}
+
+.edit-panel button:hover {
+  background: rgba(50, 50, 50, 0.95);
+}
+
+
+/* Контейнер react-rnd */
+
+.editor-item {
+  overflow: visible;
+}
+
+
+/* Сам предмет */
+
+.editor-item .portfolio-item {
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+
+  display: block;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transform: none;
+}
+
+
+/* Изображение */
+
+.editor-item .portfolio-item img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+
+  pointer-events: none;
+}
+
+
+/* В режиме редактирования показываем рамку */
+
+.editor-item-active {
+  outline: 1px dashed rgba(255, 255, 255, 0.7);
+}
+
+
+/* Убираем обычный hover во время редактирования */
+
+.editor-item-active .portfolio-item:hover {
+  transform: none;
+  filter: none;
+}
+
+
+/* Ручки изменения размера */
+
+.editor-item-active > div {
+  z-index: 1000;
+}
+
+
+/* Чтобы предметы не перехватывали случайные клики */
+
+.editor-item-active .portfolio-item {
+  cursor: move;
+}
+/* =========================================================
+   EDITOR
+========================================================= */
+
+.edit-button {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+
+  padding: 10px 16px;
+
+  background: rgba(20, 20, 20, 0.85);
+  color: white;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+}
+
+.edit-button.active {
+  background: white;
+  color: #111;
+}
+
+.edit-panel {
+  position: fixed;
+
+  top: 24px;
+  right: 105px;
+
+  z-index: 1000;
+
+  display: flex;
+  gap: 8px;
+}
+
+.edit-panel button {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+
+  padding: 10px 14px;
+
+  background: rgba(20, 20, 20, 0.85);
+  color: white;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   RND
+========================================================= */
+
+.editor-item-active {
+  outline: 1px dashed rgba(255, 255, 255, 0.8);
+}
+
+.transform-layer {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  transform-origin: center center;
+
+  transform-style: preserve-3d;
+
+  pointer-events: none;
+}
+
+.portfolio-item {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  transform: none;
+
+  cursor: pointer;
+
+  pointer-events: auto;
+}
+
+.portfolio-item img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  pointer-events: none;
+}
+
+
+/* В EDIT клик не открывает кейс */
+
+.portfolio-item.editing {
+  cursor: move;
+}
+
+
+/* =========================================================
+   ПАНЕЛЬ ПОВОРОТА И ПЕРСПЕКТИВЫ
+========================================================= */
+
+.transform-controls {
+  position: absolute;
+
+  left: calc(100% + 12px);
+  top: 0;
+
+  width: 190px;
+
+  padding: 12px;
+
+  border-radius: 12px;
+
+  background: rgba(20, 20, 20, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  color: white;
+
+  z-index: 5000;
+
+  pointer-events: auto;
+}
+
+.transform-title {
+  margin-bottom: 12px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+}
+
+.transform-controls label {
+  display: block;
+
+  margin-top: 10px;
+
+  font-size: 9px;
+  color: #aaa;
+}
+
+.transform-controls input[type="range"] {
+  display: block;
+
+  width: 100%;
+
+  margin: 7px 0 3px;
+
+  cursor: pointer;
+
+  pointer-events: auto;
+}
+
+.transform-controls span {
+  display: block;
+
+  color: white;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   RND RESIZE HANDLES
+========================================================= */
+
+.react-resizable-handle {
+  z-index: 6000;
+}
+
+.react-resizable-handle-se,
+.react-resizable-handle-sw,
+.react-resizable-handle-ne,
+.react-resizable-handle-nw {
+  width: 12px !important;
+  height: 12px !important;
+
+  background: white;
+
+  border: 1px solid #111;
+
+  border-radius: 50%;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .transform-controls {
+    left: 0;
+    top: calc(100% + 10px);
+  }
+
+  .edit-panel {
+    top: 65px;
+    right: 20px;
+  }
+
+  .edit-button {
+    top: 20px;
+    right: 20px;
+  }
+}
+/* =========================================================
+   СТАРТОВЫЙ ЭКРАН — ЗАКРЫТЫЙ КЕЙС
+========================================================= */
+
+.closed-case-screen {
+  position: fixed;
+  inset: 0;
+
+  z-index: 500;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 34px;
+
+  background: #151515;
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s ease;
+}
+
+
+/* Сам закрытый кейс */
+
+.closed-case {
+  width: min(
+    84vw,
+    calc(84vh * 1402 / 1122)
+  );
+
+  aspect-ratio: 1402 / 1122;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  animation: closedCaseAppear 2.5s ease both;
+}
+
+.closed-case img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   КНОПКА ОТКРЫТЬ
+========================================================= */
+
+.open-button {
+  border: 0;
+
+  min-width: 150px;
+
+  padding: 14px 28px;
+
+  border-radius: 999px;
+
+  background: #e96b9a;
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 30px rgba(233, 107, 154, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+
+  animation: buttonAppear 1s ease 0.25s both;
+}
+
+.open-button:hover {
+  transform: translateY(-2px);
+
+  background: #ed78a4;
+
+  box-shadow:
+    0 14px 35px rgba(233, 107, 154, 0.35);
+}
+
+.open-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+
+/* =========================================================
+   АНИМАЦИЯ ОТКРЫТИЯ
+========================================================= */
+
+.case-is-opening .closed-case-screen {
+  animation: caseOpening 0.9s ease forwards;
+}
+
+
+/* Открытый кейс появляется после перехода */
+
+.case-is-open .case-wrapper {
+  animation: openCaseAppear 0.8s ease both;
+}
+
+
+/* =========================================================
+   KEYFRAMES
+========================================================= */
+
+@keyframes closedCaseAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+@keyframes buttonAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes caseOpening {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  35% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.08);
+    pointer-events: none;
+  }
+}
+
+
+@keyframes openCaseAppear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .closed-case {
+    width: 105vw;
+  }
+
+  .open-button {
+    min-width: 140px;
+
+    padding: 13px 24px;
+  }
+}
+
+/* =========================================================
+ /* =========================================================
+   ОКНО ПРЕЗЕНТАЦИИ
+========================================================= */
+
+.presentation-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: rgba(0, 0, 0, 0.72);
+
+  backdrop-filter: blur(12px);
+
+  animation: presentationFadeIn 0.25s ease both;
+}
+
+.presentation-window {
+  position: relative;
+
+  width: min(1200px, 92vw);
+  height: min(88vh, 900px);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: white;
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.55);
+
+  animation: presentationOpen 0.35s ease both;
+}
+
+.pdf-viewer {
+  flex: 1;
+
+  min-height: 0;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background: #f4f4f4;
+}
+
+.pdf-viewer canvas {
+  display: block;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.18);
+
+  background: white;
+}
+
+.pdf-loading {
+  font-size: 16px;
+  color: #555;
+}
+
+.pdf-controls {
+  flex-shrink: 0;
+
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 22px;
+
+  background: white;
+
+  border-top: 1px solid #e5e5e5;
+}
+
+.pdf-controls button {
+  width: 38px;
+  height: 38px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: #222;
+
+  color: white;
+
+  font-size: 28px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.pdf-controls button:hover {
+  transform: scale(1.08);
+
+  background: #000;
+}
+
+.pdf-controls span {
+  min-width: 60px;
+
+  text-align: center;
+
+  font-size: 14px;
+
+  color: #333;
+}
+
+.presentation-close {
+  position: absolute;
+
+  top: 12px;
+  right: 14px;
+
+  z-index: 10;
+
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(20, 20, 20, 0.75);
+
+  color: white;
+
+  font-size: 28px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.presentation-close:hover {
+  transform: scale(1.08);
+
+  background: rgba(20, 20, 20, 0.95);
+}
+
+@keyframes presentationFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes presentationOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================================================= */
+
+@media (max-width: 700px) {
+  .presentation-modal {
+    padding: 8px;
+  }
+
+  .presentation-window {
+    width: 96vw;
+    height: 92vh;
+
+    border-radius: 14px;
+  }
+
+  .pdf-viewer {
+    padding: 10px;
+  }
+
+  .pdf-controls {
+    height: 54px;
+
+    gap: 18px;
+  }
+
+  .pdf-controls button {
+    width: 36px;
+    height: 36px;
+
+    font-size: 26px;
+  }
+
+  .presentation-close {
+    top: 8px;
+    right: 8px;
+
+    width: 38px;
+    height: 38px;
+  }
+}
+/** =========================================================
+   ПРОПУСК
+========================================================= */
+
+.pass-modal {
+  position: fixed !important;
+  inset: 0;
+
+  z-index: 5000;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.72);
+
+  backdrop-filter: blur(12px);
+
+  animation: passModalFade 0.25s ease both;
+}
+.pass-window {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  max-width: 90vw;
+  max-height: 90vh;
+
+  padding: 50px 50px 35px;
+
+  box-sizing: border-box;
+
+  border-radius: 24px;
+
+  background: rgba(28, 28, 28, 0.96);
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.55);
+
+  animation: passWindowOpen 0.35s ease both;
+}
+.pass-large {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 75vw;
+  max-height: 65vh;
+
+  object-fit: contain;
+  object-fit: contain;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s ease;
+}
+
+.pass-flip {
+  margin-top: 28px;
+
+  padding: 13px 28px;
+
+  border: 0;
+  border-radius: 14px;
+
+  background: #e56b9f;
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.pass-flip:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.pass-close {
+  position: absolute;
+
+  top: 12px;
+  right: 15px;
+
+  z-index: 5;
+
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.1);
+
+  color: white;
+
+  font-size: 28px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.pass-close:hover {
+  transform: scale(1.08);
+
+  background: rgba(255, 255, 255, 0.18);
+}
+
+@keyframes passModalFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes passWindowOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================================================= */
+
+@media (max-width: 700px) {
+  .pass-modal {
+    padding: 15px;
+  }
+
+  .pass-window {
+    max-width: 94vw;
+    max-height: 92vh;
+
+    padding: 45px 20px 25px;
+
+    border-radius: 18px;
+  }
+
+  .pass-large {
+    width: auto;
+    height: auto;
+
+    max-width: 82vw;
+    max-height: 65vh;
+  }
+
+  .pass-flip {
+    margin-top: 20px;
+
+    padding: 12px 24px;
+  }
+}
+/* =========================================================
+   ПАПКА / ДОСТИЖЕНИЯ
+========================================================= */
+
+.folder-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: rgba(0, 0, 0, 0.72);
+
+  backdrop-filter: blur(12px);
+
+  animation: folderModalFade 0.25s ease both;
+}
+
+.folder-window {
+  position: relative;
+
+  width: min(1200px, 92vw);
+  height: min(88vh, 900px);
+
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background: #181818;
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.55);
+
+  animation: folderWindowOpen 0.35s ease both;
+}
+
+
+/* =========================================================
+   ОТКРЫТАЯ ПАПКА
+========================================================= */
+
+.folder-open-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   ДИПЛОМ
+========================================================= */
+
+.document-viewer {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.document-main {
+  display: block;
+
+  width: auto;
+  height: 68%;
+
+  max-width: 72%;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(0 20px 35px rgba(0, 0, 0, 0.45));
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   СТРЕЛКИ
+========================================================= */
+
+.document-arrow {
+  position: absolute;
+
+  top: 50%;
+
+  width: 52px;
+  height: 52px;
+
+  transform: translateY(-50%);
+
+  z-index: 10;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(20, 20, 20, 0.72);
+
+  color: white;
+
+  font-size: 42px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: auto;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.document-arrow:hover {
+  background: rgba(20, 20, 20, 0.92);
+
+  transform:
+    translateY(-50%)
+    scale(1.08);
+}
+
+.document-arrow-left {
+  left: 30px;
+}
+
+.document-arrow-right {
+  right: 30px;
+}
+
+
+/* =========================================================
+   ГАЛЕРЕЯ
+========================================================= */
+
+.documents-gallery {
+  position: absolute;
+
+  top: 24px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  z-index: 15;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 10px 14px;
+
+  border-radius: 18px;
+
+  background: rgba(20, 20, 20, 0.72);
+
+  backdrop-filter: blur(12px);
+}
+
+.document-thumbnail {
+  width: 90px;
+  height: 65px;
+
+  flex: 0 0 auto;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  border: 2px solid transparent;
+  border-radius: 8px;
+
+  background: #222;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.document-thumbnail:hover {
+  transform: translateY(-4px);
+}
+
+.document-thumbnail.active {
+  border-color: #e56b9f;
+
+  transform: translateY(-4px);
+}
+
+.document-thumbnail img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   КРЕСТИК
+========================================================= */
+
+.folder-close {
+  position: absolute;
+
+  top: 14px;
+  right: 16px;
+
+  z-index: 30;
+
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(20, 20, 20, 0.78);
+
+  color: white;
+
+  font-size: 28px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.2s ease;
+}
+
+.folder-close:hover {
+  transform: scale(1.08);
+}
+
+
+/* =========================================================
+   АНИМАЦИЯ
+========================================================= */
+
+@keyframes folderModalFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes folderWindowOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .folder-modal {
+    padding: 12px;
+  }
+
+  .folder-window {
+    width: 96vw;
+    height: 92vh;
+
+    border-radius: 18px;
+  }
+
+  .documents-gallery {
+    top: 12px;
+
+    width: calc(100% - 80px);
+
+    overflow-x: auto;
+
+    justify-content: flex-start;
+
+    gap: 6px;
+
+    padding: 7px;
+  }
+
+  .document-thumbnail {
+    width: 72px;
+    height: 58px;
+  }
+
+  .document-main {
+    max-width: 75%;
+    height: 62%;
+  }
+
+  .document-arrow {
+    width: 44px;
+    height: 44px;
+
+    font-size: 34px;
+  }
+
+  .document-arrow-left {
+    left: 12px;
+  }
+
+  .document-arrow-right {
+    right: 12px;
+  }
+}
+/* =========================================================
+   БИНОКЛЬ — ПРОСМОТР
+========================================================= */
+
+.binocular-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1200;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: rgba(0, 0, 0, 0.72);
+
+  backdrop-filter: blur(12px);
+
+  animation: binocularModalFade 0.25s ease both;
+}
+
+.binocular-window {
+  position: relative;
+
+  width: min(1400px, 94vw);
+
+  max-height: 90vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: binocularWindowOpen 0.35s ease both;
+}
+
+.binocular-image-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1672 / 941;
+}
+
+.binocular-view-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  user-select: none;
+}
+
+
+/* =========================================================
+   КЛИКАБЕЛЬНЫЕ ОБЛАСТИ
+========================================================= */
+
+.binocular-hotspot {
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 30px;
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+
+  background: #536b45;
+
+  color: white;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(15px, 1.45vw, 24px);
+  font-weight: 500;
+
+  letter-spacing: 0.02em;
+
+  cursor: pointer;
+
+  z-index: 5;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+/* Левая кнопка «БРИФ ДАЧА» */
+
+.binocular-hotspot-dacha {
+  left: 8.5%;
+  top: 41.5%;
+
+  width: 30.5%;
+  height: 14%;
+}
+
+
+/* Правая кнопка «БРИФ ХАЙКИНГ» */
+
+.binocular-hotspot-hiking {
+  left: 61.5%;
+  top: 41.5%;
+
+  width: 29%;
+  height: 14%;
+}
+
+
+/* Небольшая подсветка при наведении */
+
+.binocular-hotspot:hover {
+  background: #617a52;
+
+  transform: scale(1.025);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+/* =========================================================
+   КРЕСТИК
+========================================================= */
+
+.binocular-close {
+  position: absolute;
+
+  top: -10px;
+  right: -10px;
+
+  z-index: 20;
+
+  width: 44px;
+  height: 44px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(20, 20, 20, 0.82);
+
+  color: white;
+
+  font-size: 30px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.2s ease;
+}
+
+.binocular-close:hover {
+  transform: scale(1.08);
+}
+
+
+/* =========================================================
+   АНИМАЦИЯ
+========================================================= */
+
+@keyframes binocularModalFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes binocularWindowOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .binocular-modal {
+    padding: 12px;
+  }
+
+  .binocular-window {
+    width: 98vw;
+  }
+
+  .binocular-close {
+    top: -4px;
+    right: -4px;
+
+    width: 38px;
+    height: 38px;
+
+    font-size: 26px;
+  }
+}
+@media (max-width: 700px) {
+  .presentation-window {
+    width: 96vw;
+    height: 92vh;
+    border-radius: 14px;
+  }
+
+  .presentation-frame {
+    width: 100%;
+    height: 100%;
+  }
+}
+@supports (-webkit-touch-callout: none) {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    height: auto;
+  }
+
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .portfolio {
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
+  }
+
+  .case-wrapper {
+    position: relative;
+  }
+
+  .closed-case-screen {
+    position: fixed;
+    inset: 0;
+    min-height: 100vh;
+  }
+}
