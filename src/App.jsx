@@ -7,7 +7,7 @@ import './App.css'
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker
 
-const A = '/assets'
+const A = `${import.meta.env.BASE_URL}assets`
 
 const defaultPositions = {
   folder: {
