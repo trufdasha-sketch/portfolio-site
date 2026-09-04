@@ -499,8 +499,10 @@ function App() {
   const [selectedDocument, setSelectedDocument] =
     useState(0)
 
-  const [editMode, setEditMode] =
-    useState(false)
+const [editMode, setEditMode] =
+  useState(() =>
+    new URLSearchParams(window.location.search).has('edit')
+  )
 
 
   /* =========================================================
@@ -756,24 +758,25 @@ function App() {
          EDIT
       ===================================================== */}
 
-      <button
-        className={`edit-button ${
-          editMode ? 'active' : ''
-        }`}
-        onClick={() =>
-          setEditMode(
-            (value) => !value
-          )
-        }
-      >
-        {editMode
-          ? 'EXIT EDIT'
-          : 'EDIT'}
-      </button>
+ {new URLSearchParams(window.location.search).has('edit') && (
+  <button
+    className={`edit-button ${
+      editMode ? 'active' : ''
+    }`}
+    onClick={() =>
+      setEditMode(
+        (value) => !value
+      )
+    }
+  >
+    {editMode
+      ? 'EXIT EDIT'
+      : 'EDIT'}
+  </button>
+)}
 
-
-      {editMode && (
-        <div className="edit-panel">
+{new URLSearchParams(window.location.search).has('edit') && editMode && (
+  <div className="edit-panel">
 
           <button
             onClick={savePositions}
