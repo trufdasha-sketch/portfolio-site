@@ -77,7 +77,7 @@ const defaultPositions = {
 const items = [
   {
     id: 'binoculars',
-    image: `${A}/binoculars/binoculars.png`,
+    image: `${A}/binoculars/binoculars.webp`,
     title: 'Яндекс Маркет',
     description:
       'Интерактивный кейс с брифами «Дача» и «Хайкинг».',
@@ -85,7 +85,7 @@ const items = [
 
   {
     id: 'calculator',
-    image: `${A}/calculator/calculator.png`,
+    image: `${A}/calculator/calculator.webp`,
     title: 'VK Analytics',
     description: 'Кейс с аналитикой VK Video.',
     presentation: `${A}/presentations/vk.pdf`,
@@ -93,7 +93,7 @@ const items = [
 
   {
     id: 'samokat',
-    image: `${A}/samokat/samokat-bag.png`,
+    image: `${A}/samokat/samokat-bag.webp`,
     title: 'Самокат',
     description:
       'Креативная концепция и рекламная кампания.',
@@ -102,7 +102,7 @@ const items = [
 
   {
     id: 'folder',
-    image: `${A}/folder/folder-closed.png`,
+    image: `${A}/folder/folder-closed.webp`,
     title: 'Документы',
     description:
       'Дипломы, сертификаты и профессиональные материалы.',
@@ -110,7 +110,7 @@ const items = [
 
   {
     id: 'award',
-    image: `${A}/award/award-front.png`,
+    image: `${A}/award/award-front.webp`,
     title: 'Silver Mercury',
     description: 'Награда и презентация кейса.',
     presentation: `${A}/presentations/silver-mercury.pdf`,
@@ -118,7 +118,7 @@ const items = [
 
   {
     id: 'phone',
-    image: `${A}/phone/phone.png`,
+    image: `${A}/phone/phone.webp`,
     title: 'МТС',
     description: 'Креативный кейс для МТС.',
     presentation: `${A}/presentations/mts.pdf`,
@@ -126,7 +126,7 @@ const items = [
 
   {
     id: 'pass',
-    image: `${A}/pass/pass-front.png`,
+    image: `${A}/pass/pass-front.webp`,
     title: 'Контакты',
     description: 'Контактная информация.',
   },
@@ -724,7 +724,7 @@ function App() {
 
           <div className="closed-case">
             <img
-              src={`${A}/case/case-closed.png`}
+              src={`${A}/case/case-closed.webp`}
               alt=""
             />
           </div>
@@ -801,7 +801,7 @@ function App() {
       >
 
         <img
-          src={`${A}/case/case-empty.png`}
+          src={`${A}/case/case-empty.webp`}
           className="case"
           alt=""
         />
@@ -1226,8 +1226,8 @@ function App() {
             <img
               src={
                 passSide === 'front'
-                  ? `${A}/pass/pass-front.png`
-                  : `${A}/pass/pass-back.png`
+                  ? `${A}/pass/pass-front.webp`
+                  : `${A}/pass/pass-back.webp`
               }
               className="pass-large"
               alt="Пропуск"
@@ -1286,7 +1286,7 @@ function App() {
 
 
             <img
-              src={`${A}/folder/folder-open.png`}
+              src={`${A}/folder/folder-open.webp`}
               className="folder-open-image"
               alt=""
             />
@@ -1315,7 +1315,7 @@ function App() {
                   String(
                     selectedDocument + 1
                   ).padStart(2, '0')
-                }.png`}
+                }.webp`}
                 className="document-main"
                 alt={`Документ ${
                   selectedDocument + 1
@@ -1344,12 +1344,12 @@ function App() {
             <div className="documents-gallery">
 
               {[
-                'document-01.png',
-                'document-02.png',
-                'document-03.png',
-                'document-04.png',
-                'document-05.png',
-                'document-06.png',
+                'document-01.webp',
+                'document-02.webp',
+                'document-03.webp',
+                'document-04.webp',
+                'document-05.webp',
+                'document-06.webp',
               ].map(
                 (
                   document
@@ -1434,7 +1434,7 @@ function App() {
             <div className="binocular-image-wrapper">
 
               <img
-                src={`${A}/binoculars/binocular-view.png`}
+                src={`${A}/binoculars/binocular-view.webp`}
                 className="binocular-view-image"
                 alt="Яндекс Маркет"
               />
